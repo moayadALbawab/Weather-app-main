@@ -99,6 +99,9 @@
     --font-size-forecast-dropdown: var(--fs-16);
     --font-size-forecast-hour: var(--fs-20);
 
+    --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.45);
+    --card-elev: 0 6px 18px rgba(0, 0, 0, 0.30);
+    --transition-fast: 160ms;
     @media (width >= calc(700 / 16 * 1rem)) {
       --font-size-dropdown: var(--fs-16);
     }
@@ -138,6 +141,7 @@
     font: inherit;
     width: 100%;
     border: none;
+    transition: box-shadow var(--transition-fast) ease, background-color var(--transition-fast) ease, color var(--transition-fast) ease, transform var(--transition-fast) ease;
   }
 
   .wrapper {
@@ -206,6 +210,14 @@
     background-color: var(--color-panel-bg-dark);
     border: 1px solid var(--color-panel-border);
     border-radius: 12px;
+    box-shadow: var(--card-elev);
+    transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease, border-color var(--transition-fast) ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.55);
+      border-color: var(--color-panel-bg-light);
+    }
   }
 }
 
@@ -274,11 +286,18 @@
       background-color: var(--color-panel-bg-dark);
       font-size: var(--font-size-search);
       padding: 16px 20px 16px 60px;
-      color: var(--color-text-med-light);
+      color: var(--color-text-light);
       border-radius: 12px;
+      transition: box-shadow var(--transition-fast) ease, background-color var(--transition-fast) ease, color var(--transition-fast) ease;
+
+      &::placeholder {
+        color: var(--color-text-med-light);
+      }
 
       &:focus {
-        outline: 2px solid var(--color-text-med-light);
+        outline: none;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+        background-color: var(--color-panel-bg-med);
       }
     }
 
@@ -288,10 +307,13 @@
       font-size: var(--font-size-search);
       color: var(--color-text-light);
       padding: 16px 24px;
-      transition: background-color 120ms ease-in-out;
+      transition: background-color var(--transition-fast) ease, transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.30);
 
       &:hover {
         background-color: var(--color-button-bg-hover);
+        transform: translateY(-4px);
+        box-shadow: 0 22px 50px rgba(0,0,0,0.45);
         cursor: pointer;
       }
     }
@@ -450,6 +472,20 @@
         height: 100%;
         max-height: none;
       }
+
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background-clip: padding-box;
+      }
+
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.08) transparent;
     }
 
     .hourly__header {
